@@ -1,0 +1,11 @@
+INPUT:
+  SIZE: (224, 224)
+  TRANSFORMS: ["random_flip", "center_crop", "normalize"]
+
+DATASET:
+  NAME: "MS_OfficeHome"
+  SOURCE_DOMAINS: []
+  TARGET_DOMAINS: []
+  DOMAINs: ["Art", "Clipart", "Product", "Real World"]
+
+
