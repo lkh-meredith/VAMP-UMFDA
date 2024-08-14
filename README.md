@@ -61,4 +61,4 @@ To calculate the average results for this folder, you can run
 
 ## Acknowledgements
 
-Our code is based on [CoOp](https://github.com/KaiyangZhou/CoOp), [MaPLe](https://github.com/muzairkhattak/multimodal-prompt-learning) and [DAPL](https://github.com/LeapLabTHU/DAPrompt/tree/main) repository. We thank the authors for releasing their code.
+Our code is based on [CoOp](https://github.com/KaiyangZhou/CoOp), [MaPLe](https://github.com/muzairkhattak/multimodal-prompt-learning) and [DAPL](https://github.com/LeapLabTHU/DAPrompt/tree/main) repository. We thank all the authors for releasing their codes and datasets.
