@@ -12,7 +12,7 @@ for SHOTS in 3 6
 do
       for SEED in 1 2 3 5 # set different seed
       do
-          DIR=./results/${TRAINER}/vit16//${DATASET}/shot${SHOTS}/seed${SEED}
+          DIR=./results/${TRAINER}/${DATASET}/shot_p${SHOTS}/seed${SEED}
           echo "Run this job and save the output to ${DIR}"
           python train.py \
           --root ${DATA} \
@@ -29,7 +29,7 @@ do
       done
       for SEED in 1 2 3 5
       do
-          DIR=./results/${TRAINER}/vit16/${date}/${DATASET}/maple_md/shot${SHOTS}/epoch${EPOCH}/lr${LR}_sigma_${SIGMA}/bs_x${BATCH_SIZE_X}_bs_u${BATCH_SIZE_U_T}/lr_${LR}_alpha1_${ALPHA1}_alpha2_${ALPHA2}_cof${CONFI}/seed${SEED}
+          DIR=./results/${TRAINER}/${DATASET}/shot_p${SHOTS}/seed${SEED}
           echo "Run this job and save the output to ${DIR}"
           python train.py \
           --root ${DATA} \
@@ -46,7 +46,7 @@ do
       done
       for SEED in 1 2 3 5
       do
-          DIR=./results/${TRAINER}/vit16/${date}/${DATASET}/maple_md/shot${SHOTS}/epoch${EPOCH}/lr${LR}_sigma_${SIGMA}/bs_x${BATCH_SIZE_X}_bs_u${BATCH_SIZE_U_T}/lr_${LR}_alpha1_${ALPHA1}_alpha2_${ALPHA2}_cof${CONFI}/seed${SEED}
+          DIR=./results/${TRAINER}/${DATASET}/shot_p${SHOTS}/seed${SEED}
           echo "Run this job and save the output to ${DIR}"
           python train.py \
           --root ${DATA} \
@@ -63,8 +63,7 @@ do
       done
       for SEED in 1 2 3 5
       do
-          DIR=./results/${TRAINER}/vit16/${date}/${DATASET}/maple_md/shot${SHOTS}/epoch${EPOCH}/lr${LR}_sigma_${SIGMA}/bs_x${BATCH_SIZE_X}_bs_u${BATCH_SIZE_U_T}/lr_${LR}_alpha1_${ALPHA1}_alpha2_${ALPHA2}_cof${CONFI}/seed${SEED}
-          echo "Run this job and save the output to ${DIR}"
+          DIR=./results/${TRAINER}/${DATASET}/shot_p${SHOTS}/seed${SEED}
           python train.py \
           --root ${DATA} \
           --seed ${SEED} \

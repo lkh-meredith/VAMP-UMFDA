@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.nn import functional as F
 from torch.cuda.amp import GradScaler, autocast
 
-from dassl.engine import TRAINER_REGISTRY
+from dassl.engine import TRAINER_REGISTRY, TrainerXU
 from dassl.utils import load_pretrained_weights, count_num_param
 from dassl.metrics import compute_accuracy
 from dassl.optim import build_optimizer, build_lr_scheduler
@@ -243,13 +243,8 @@ class MMD_loss(nn.Module):
 
 
 @TRAINER_REGISTRY.register()
-class VAMP(BaseDA):
+class VAMP(TrainerXU):
     def build_data_loader(self):
-        """Create essential data-related attributes.
-
-        A re-implementation of this method must create the
-        same attributes (self.dm is optional).
-        """
         dm = MyDataManager(self.cfg)
 
         self.train_loader_x = dm.train_loader_x
@@ -634,18 +629,38 @@ class VAMP(BaseDA):
         results_all = results["accuracy"]
 
         return results_all
+    
+            
+    def load_model(self, directory, epoch=None):
+        if not directory:
+            print("Note that load_model() is skipped as no pretrained model is given")
+            return
 
-    def parse_batch_for_tsne(self, batch):
-        input = batch["img"][0:self.batch_size_x]
-        label = batch["label"][0:self.batch_size_x]
-        domain = batch["domain"][0:self.batch_size_x]
+        names = self.get_model_names()
 
-        input_u = batch["img"][self.batch_size_x:]
-        domain_u = batch["domain"][self.batch_size_x:]
+        # By default, the best model is loaded
+        model_file = "model-best.pth.tar"
 
-        input = input.to(self.device)
-        label = label.to(self.device)
-        input_u = input_u.to(self.device)
-        domain_u = domain_u.to(self.device)
+        if epoch is not None:
+            model_file = "model.pth.tar-" + str(epoch)
 
-        return input, label, domain, input_u, domain_u
+        for name in names:
+            model_path = osp.join(directory, name, model_file)
+
+            if not osp.exists(model_path):
+                raise FileNotFoundError('Model not found at "{}"'.format(model_path))
+
+            checkpoint = load_checkpoint(model_path)
+            state_dict = checkpoint["state_dict"]
+            epoch = checkpoint["epoch"]
+
+            # Ignore fixed token vectors
+            if "token_prefix" in state_dict:
+                del state_dict["token_prefix"]
+
+            if "token_suffix" in state_dict:
+                del state_dict["token_suffix"]
+
+            print("Loading weights to {} " 'from "{}" (epoch = {})'.format(name, model_path, epoch))
+            # set strict=False
+            self._models[name].load_state_dict(state_dict, strict=False)
