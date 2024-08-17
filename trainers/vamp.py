@@ -49,7 +49,7 @@ class MultiModalPromptLearner(nn.Module):
             prompt_prefix = ctx_init
         else:
             # random initialization
-            ctx_vectors = torch.empty(n_ctx, ctx_dim, dtype=dtype)  # 2 512
+            ctx_vectors = torch.empty(n_ctx, ctx_dim, dtype=dtype)  
             nn.init.normal_(ctx_vectors, std=0.02)
             prompt_prefix = " ".join(["X"] * n_ctx)  # + " ".join(["X"] * n_ctx)
             # self.nctx_init = n_ctx
@@ -60,7 +60,7 @@ class MultiModalPromptLearner(nn.Module):
 
         self.proj = nn.Linear(768, ctx_dim).half()
 
-        ctx_vectors_v = torch.empty(n_ctx, 768, dtype=dtype)  # 2 512
+        ctx_vectors_v = torch.empty(n_ctx, 768, dtype=dtype)  
         nn.init.normal_(ctx_vectors_v, std=0.02)
         self.ctx_v = nn.Parameter(ctx_vectors_v).half()
      
@@ -89,7 +89,7 @@ class MultiModalPromptLearner(nn.Module):
 
         self.register_buffer("token_prefix", embedding[:, :1, :])  # SOS
       
-        self.register_buffer("token_suffix", embedding[:, 1 + n_ctx:, :])  # A photo of a xx,EOS
+        self.register_buffer("token_suffix", embedding[:, 1 + n_ctx:, :]) 
 
         self.n_cls = n_cls
         self.n_ctx = n_ctx
