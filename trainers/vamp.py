@@ -72,7 +72,7 @@ class MultiModalPromptLearner(nn.Module):
             nn.init.normal_(single_para, std=0.02)
 
         # Also make corresponding projection layers, for each prompt
-        # single_layer = nn.Linear(ctx_dim, 768).half()
+        
         self.shared_proj = cfg.TRAINER.VAMP.SHARED_PROJ
 
         if not self.shared_proj:
@@ -110,7 +110,7 @@ class MultiModalPromptLearner(nn.Module):
             ],
             dim=1,
         )
-        # print(prompts.size())
+     
         return prompts
 
     def forward(self):
