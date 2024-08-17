@@ -248,8 +248,8 @@ class VAMP(TrainerXU):
         dm = MyDataManager(self.cfg)
 
         self.train_loader_x = dm.train_loader_x
-        self.train_loader_u = dm.train_loader_u  # optional, can be None
-        self.val_loader = dm.val_loader  # optional, can be None
+        self.train_loader_u = dm.train_loader_u  # optional
+        self.val_loader = dm.val_loader  # optional
         self.test_loader = dm.test_loader
 
         self.num_classes = dm.num_classes
@@ -287,8 +287,6 @@ class VAMP(TrainerXU):
             param.requires_grad_(False)
             if "prompt_learner" in name:
                 param.requires_grad_(True)
-            # if "share_visual_ctx" in name:
-            #     param.requires_grad_(True)
 
         # Double check
         enabled = set()
