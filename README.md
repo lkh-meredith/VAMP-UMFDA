@@ -1,6 +1,7 @@
 # VAMP framework for the UMFDA
 
-This is the code for our paper "Vision-aware Multimodal Prompt Tuning for Uploadable Multi-source Few-shot Domain Adaptation".
+This is the code for our paper "Vision-aware Multimodal Prompt Tuning for Uploadable Multi-source Few-shot Domain Adaptation" that has been accepted by AAAI-2025!
+
 
 <p align="center" class="half">
 <img src="image/UMFDA.png" title="UMFDA" alt="UMFDA" style="width: 30%;">
